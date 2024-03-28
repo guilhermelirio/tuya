@@ -369,8 +369,12 @@
         "name": "Mode",
         "state": {
           "standby": "Standby",
+          "fullcharge": "Full charge",
+          "dustcenterworking": "Dust collection",
+          "fault": "Fault",
           "random": "Random",
           "smart": "Smart",
+          "idle": "Idle",
           "wall_follow": "Follow wall",
           "mop": "Mop",
           "spiral": "Spiral",
@@ -378,15 +382,19 @@
           "right_spiral": "Spiral right",
           "bow": "Bow",
           "left_bow": "Bow left",
+          "remotectl": "Remote control",
           "right_bow": "Bow right",
           "partial_bow": "Bow partially",
           "chargego": "Return to dock",
+          "charging": "Charging",
+          "selectroom": "Room selected",
           "single": "Single",
           "zone": "Zone",
           "pose": "Pose",
           "point": "Point",
           "part": "Part",
-          "pick_zone": "Pick zone"
+          "pick_zone": "Pick zone",
+          "tocharge": "To charge"
         }
       },
       "vertical_fan_angle": {
@@ -817,6 +825,9 @@
       },
       "lock_last_housekeeper": {
         "name": "Last ID housekeeper"
+      },
+      "lock_last_unlock_request": {
+        "name": "Last ID request unlock"
       },
       "formaldehyde": {
         "name": "Formaldehyde"

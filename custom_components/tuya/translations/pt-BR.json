@@ -11,7 +11,7 @@
             "reauth_user_code": {
                 "description": "A integração do Tuya agora usa um método de login aprimorado. Para autenticar novamente com sua conta Smart Life ou Tuya Smart, você precisa inserir seu código de usuário.\n\nVocê pode encontrar esse código no aplicativo Smart Life ou Tuya Smart em **Configurações** > **Conta e segurança** tela e insira o código mostrado no campo **Código do usuário**. O código do usuário diferencia maiúsculas de minúsculas. Certifique-se de inseri-lo exatamente como mostrado no aplicativo.",
                 "data": {
-                  "user_code": "Código de usuário"
+                    "user_code": "Código de usuário"
                 }
             },
             "user": {
@@ -177,6 +177,11 @@
                 "state": {
                     "bow": "Arco",
                     "chargego": "Retorno \u00e0 base",
+                    "dustcenterworking": "Coletando poeira",
+                    "fault": "Agarrado / Preso",
+                    "fullcharge": "Totalmente carregado",
+                    "idle": "Parado",
+                    "charging": "Carregando",
                     "left_bow": "Arco \u00e0 esquerda",
                     "left_spiral": "Espiral esquerda",
                     "mop": "Mop",
@@ -186,12 +191,15 @@
                     "point": "Ponto",
                     "pose": "Pose",
                     "random": "Aleat\u00f3rio",
+                    "remotectl": "Controle Remoto",
                     "right_bow": "Arco \u00e0 direita",
                     "right_spiral": "Espiral \u00e0 direita",
+                    "selectroom": "\u00c1rea selecionada",
                     "single": "\u00danico",
                     "smart": "Smart",
                     "spiral": "Espiral",
                     "standby": "Em espera",
+                    "tocharge": "Retornar \u00e0 base",
                     "wall_follow": "Siga a parede",
                     "zone": "Zona"
                 }

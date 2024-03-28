@@ -371,6 +371,11 @@
           "standby": "[%key:common::state::standby%]",
           "random": "Random",
           "smart": "Smart",
+          "fullcharge": "Full charge",
+          "dustcenterworking": "Dust collection",
+          "fault": "Fault",
+          "idle": "Idle",
+          "selectroom": "Room selected",
           "wall_follow": "Follow wall",
           "mop": "Mop",
           "spiral": "Spiral",
@@ -378,9 +383,11 @@
           "right_spiral": "Spiral right",
           "bow": "Bow",
           "left_bow": "Bow left",
+          "remotectl": "Remote control",
           "right_bow": "Bow right",
           "partial_bow": "Bow partially",
           "chargego": "Return to dock",
+          "charging": "Charging",
           "single": "Single",
           "zone": "Zone",
           "pose": "Pose",
@@ -817,6 +824,9 @@
       },
       "lock_last_housekeeper": {
         "name": "Last ID housekeeper"
+      },
+      "lock_last_unlock_request": {
+        "name": "Last ID request unlock"
       },
       "formaldehyde": {
         "name": "[%key:component::tuya::entity::binary_sensor::formaldehyde::name%]"
