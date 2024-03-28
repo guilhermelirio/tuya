@@ -109,7 +109,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         self._attr_fan_speed_list = []
 
         self._attr_supported_features = (
-            VacuumEntityFeature.SEND_COMMAND | VacuumEntityFeature.STATE
+            VacuumEntityFeature.SEND_COMMAND | VacuumEntityFeature.STATE | VacuumEntityFeature.BATTERY | VacuumEntityFeature.FAN_SPEED 
         )
         if self.find_dpcode(DPCode.PAUSE, prefer_function=True):
             self._attr_supported_features |= VacuumEntityFeature.PAUSE
