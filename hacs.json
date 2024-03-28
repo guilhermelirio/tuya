@@ -2,11 +2,11 @@
   "name": "Tuya",
   "content_in_root": false,
   "domains": [
-	"alarm_control_panel",
-	"binary_sensor",
+  "alarm_control_panel",
+  "binary_sensor",
   "button",
   "camera",
-	"climate",
+  "climate",
   "cover",
   "fan",
   "humidifier",
@@ -16,7 +16,7 @@
   "select",
   "sensor",
   "siren",
-	"switch",
+  "switch",
   "vacuum"
   ],
   "iot_class": "cloud_push",
