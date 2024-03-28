@@ -138,7 +138,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             self._attr_fan_speed_list = enum_type.range
             self._attr_supported_features |= VacuumEntityFeature.FAN_SPEED
 
-        if (int_type := self.find_dpcode(DPCode.ELECTRICITY_LEFT, dptype=DPType.INTEGER)) or (int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER)):
+        if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
             self._attr_supported_features |= VacuumEntityFeature.BATTERY
             self._battery_level = int_type
 
@@ -146,8 +146,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     def battery_level(self) -> int | None:
         """Return Tuya device state."""
         if self._battery_level is None or not (
-            status := self.device.status.get(DPCode.ELECTRICITY_LEFT)
-            or self.device.status.get(DPCode.BATTERY)
+            status := self.device.status.get(DPCode.BATTERY)
         ):
             return None
         return round(self._battery_level.scale_value(status))
