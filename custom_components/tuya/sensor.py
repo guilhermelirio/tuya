@@ -571,6 +571,12 @@ SENSORS: dict[str, tuple[TuyaSensorEntityDescription, ...]] = {
             entity_category=EntityCategory.DIAGNOSTIC,
             translation_key="lock_last_housekeeper",
         ),
+        TuyaSensorEntityDescription(
+            key=DPCode.UNLOCK_REQUEST,
+            icon="mdi:account-check-outline",
+            entity_category=EntityCategory.DIAGNOSTIC,
+            translation_key="lock_last_unlock_request",
+        ),
         *BATTERY_SENSORS,
     ),
     # Sous Vide Cooker
