@@ -110,7 +110,9 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         self._attr_supported_features = (
             VacuumEntityFeature.SEND_COMMAND | 
             VacuumEntityFeature.STATE |
-            VacuumEntityFeature.BATTERY
+            VacuumEntityFeature.BATTERY |
+            VacuumEntityFeature.FAN_SPEED |
+            VacuumEntityFeature.LOCATE
         )
         if self.find_dpcode(DPCode.PAUSE, prefer_function=True):
             self._attr_supported_features |= VacuumEntityFeature.PAUSE
@@ -139,7 +141,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             self._attr_fan_speed_list = enum_type.range
             self._attr_supported_features |= VacuumEntityFeature.FAN_SPEED
 
-        if int_type := self.find_dpcode(DPCode.ELECTRICITY_LEFT, dptype=DPType.INTEGER):
+        if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
             self._attr_supported_features |= VacuumEntityFeature.BATTERY
             self._attr_battery_level = int_type
 
