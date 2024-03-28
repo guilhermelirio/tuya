@@ -98,7 +98,8 @@ async def async_setup_entry(
 class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     """Tuya Vacuum Device."""
 
-    #_fan_speed: EnumTypeData | None = None
+    _fan_speed: EnumTypeData | None = None
+    _battery_level: IntegerTypeData | None = None
     _attr_name = None
 
     def __init__(self, device: CustomerDevice, device_manager: Manager) -> None:
