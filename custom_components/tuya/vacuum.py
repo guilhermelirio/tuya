@@ -168,6 +168,9 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             #return STATE_PAUSED
         #if not (status := self.device.status.get(DPCode.STATUS)):
             #return None
+        print(self._state)
+        print("*****")
+        print(DPCode.ROBOT_STATE)
         return TUYA_STATUS_TO_HA.get(self._state)
 
     def start(self, **kwargs: Any) -> None:
