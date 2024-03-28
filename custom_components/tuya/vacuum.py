@@ -161,10 +161,10 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     def state(self) -> str | None:
         """Return Tuya vacuum device state."""
         if self.device.status.get(DPCode.PAUSE) and not (
-            self.device.status.get(DPCode.ROBOT_STATUS)
+            self.device.status.get(DPCode.ROBOT_STATE)
         ):
             return STATE_PAUSED
-        if not (status := self.device.status.get(DPCode.ROBOT_STATUS)):
+        if not (status := self.device.status.get(DPCode.ROBOT_STATE)):
             return None
         return TUYA_STATUS_TO_HA.get(status)
 
