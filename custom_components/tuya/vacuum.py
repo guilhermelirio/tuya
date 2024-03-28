@@ -98,8 +98,7 @@ async def async_setup_entry(
 class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     """Tuya Vacuum Device."""
 
-    _fan_speed: EnumTypeData | None = None
-    #_battery_level: IntegerTypeData | None = None
+    #_fan_speed: EnumTypeData | None = None
     _attr_name = None
 
     def __init__(self, device: CustomerDevice, device_manager: Manager) -> None:
@@ -107,11 +106,11 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         super().__init__(device, device_manager)
 
         self._attr_fan_speed_list = []
-        self._state = None
-        self._battery_level = None
 
         self._attr_supported_features = (
-            VacuumEntityFeature.SEND_COMMAND | VacuumEntityFeature.STATE
+            VacuumEntityFeature.SEND_COMMAND | 
+            VacuumEntityFeature.STATE |
+            VacuumEntityFeature.BATTERY
         )
         if self.find_dpcode(DPCode.PAUSE, prefer_function=True):
             self._attr_supported_features |= VacuumEntityFeature.PAUSE
@@ -140,19 +139,19 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             self._attr_fan_speed_list = enum_type.range
             self._attr_supported_features |= VacuumEntityFeature.FAN_SPEED
 
-        if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
+        if int_type := self.find_dpcode(DPCode.ELECTRICITY_LEFT, dptype=DPType.INTEGER):
             self._attr_supported_features |= VacuumEntityFeature.BATTERY
-            self._battery_level = int_type
+            self._attr_battery_level = int_type
 
     @property
     def battery_level(self) -> int | None:
-        """Return Tuya device battery level."""
-        #if self._battery_level is None or not (
-            #status := self.device.status.get(DPCode.BATTERY)
-        #):
-           # return None
-        #return round(self._battery_level.scale_value(DPCode.BATTERY))
-        return self._battery_level
+        """Return Tuya device state."""
+        # if self._attr_battery_level is None or not (
+        #     status := self.device.status.get(DPCode.ELECTRICITY_LEFT)
+        # ):
+        #     return None
+        #return round(self._battery_level.scale_value(status))
+        return self.device.status.get(DPCode.BATTERY)
 
     @property
     def fan_speed(self) -> str | None:
@@ -162,16 +161,13 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     @property
     def state(self) -> str | None:
         """Return Tuya vacuum device state."""
-        #if self.device.status.get(DPCode.PAUSE) and not (
-            #self.device.status.get(DPCode.STATUS)
-        #):
-            #return STATE_PAUSED
-        #if not (status := self.device.status.get(DPCode.STATUS)):
-            #return None
-        print(self._state)
-        print("*****")
-        print(DPCode.ROBOT_STATE)
-        return TUYA_STATUS_TO_HA.get(self._state)
+        # if self.device.status.get(DPCode.PAUSE) and not (
+        #     self.device.status.get(DPCode.STATUS)
+        # ):
+        #     return STATE_PAUSED
+        # if not (status := self.device.status.get(DPCode.STATUS)):
+        #     return None
+        return TUYA_STATUS_TO_HA.get(self._attr_state)
 
     def start(self, **kwargs: Any) -> None:
         """Start the device."""
