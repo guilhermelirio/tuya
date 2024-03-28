@@ -142,9 +142,12 @@ class DPCode(StrEnum):
     CH2O_VALUE = "ch2o_value"
     CH4_SENSOR_STATE = "ch4_sensor_state"
     CH4_SENSOR_VALUE = "ch4_sensor_value"
+    CHARGE_SWITCH = "charge_switch" # Vacuum Kabum Smart 900
     CHILD_LOCK = "child_lock"  # Child lock
     CISTERN = "cistern"
     CLEAN_AREA = "clean_area"
+    CLEAN_MODE = "clean_mode" # Vacuum Kabum Smart 900
+    CLEAN_SWITCH = "clean_switch" # Vacuum Kabum Smart 900
     CLEAN_TIME = "clean_time"
     CLICK_SUSTAIN_TIME = "click_sustain_time"
     CLOUD_RECIPE_NUMBER = "cloud_recipe_number"
@@ -263,6 +266,7 @@ class DPCode(StrEnum):
     OPEN_SPEED_STATE = "open_speed_state"
     OPPOSITE = "opposite"
     PAUSE = "pause"
+    PAUSE_SWITCH = "pause_switch" # Vacuum Kabum Smart 900
     PERCENT_CONTROL = "percent_control"
     PERCENT_CONTROL_2 = "percent_control_2"
     PERCENT_CONTROL_3 = "percent_control_3"
