@@ -82,6 +82,14 @@ BATTERY_SENSORS: tuple[TuyaSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         translation_key="battery",
     ),
+    TuyaSensorEntityDescription(
+        key=DPCode.BATTERY,
+        icon="mdi:battery",
+        device_class=SensorDeviceClass.BATTERY,
+        entity_category=EntityCategory.DIAGNOSTIC,
+        state_class=SensorStateClass.MEASUREMENT,
+        translation_key="battery",
+    ),
 )
 
 # All descriptions can be found here. Mostly the Integer data types in the
@@ -1067,6 +1075,7 @@ SENSORS: dict[str, tuple[TuyaSensorEntityDescription, ...]] = {
             icon="mdi:ticket-percent-outline",
             state_class=SensorStateClass.MEASUREMENT,
         ),
+        *BATTERY_SENSORS,
     ),
     # Curtain
     # https://developer.tuya.com/en/docs/iot/s?id=K9gf48qy7wkre
