@@ -144,12 +144,12 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
 
     @property
     def battery_level(self) -> int | None:
-        """Return Tuya device state."""
-        if self._battery_level is None or not (
-            status := self.device.status.get(DPCode.BATTERY)
-        ):
-            return None
-        return round(self._battery_level.scale_value(status))
+        """Return Tuya device battery level."""
+        #if self._battery_level is None or not (
+            #status := self.device.status.get(DPCode.BATTERY)
+        #):
+           # return None
+        return round(self._battery_level.scale_value(DPCode.BATTERY))
 
     @property
     def fan_speed(self) -> str | None:
