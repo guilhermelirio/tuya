@@ -305,6 +305,7 @@ class DPCode(StrEnum):
     RESIDUAL_ELECTRICITY = "residual_electricity"
     REVERSE_LOCK = "reverse_lock"
     RINGTONE = "ringtone"
+    ROBOT_STATE = "robot_state" # Vacuum Kabum Smart 900
     ROLL_BRUSH = "roll_brush"
     SEEK = "seek"
     SENSITIVITY = "sensitivity"  # Sensitivity
