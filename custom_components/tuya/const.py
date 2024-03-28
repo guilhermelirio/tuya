@@ -230,6 +230,7 @@ class DPCode(StrEnum):
     HUMIDITY_SET = "humidity_set"  # Humidity setting
     HUMIDITY_VALUE = "humidity_value"  # Humidity
     INSURANCE_STATUS = "insurance_status"
+    INITIATIVE_MESSAGE = "initiative_message" #jtmspro
     IPC_WORK_MODE = "ipc_work_mode"
     KEY_TONE = "key_tone"
     LANGUAGE = "language"
@@ -407,6 +408,7 @@ class DPCode(StrEnum):
     UNLOCK_PASSWORD = "unlock_password"
     UNLOCK_PHONE_REMOTE = "unlock_phone_remote"
     UNLOCK_REMOTE = "unlock_remote"
+    UNLOCK_REQUEST = "unlock_request" #jtmspro
     UNLOCK_SPECIAL = "unlock_special"
     UNLOCK_SUBADMIN = "unlock_subadmin"
     UNLOCK_SWITCH = "unlock_switch"
@@ -418,6 +420,7 @@ class DPCode(StrEnum):
     VA_BATTERY = "va_battery"
     VA_HUMIDITY = "va_humidity"
     VA_TEMPERATURE = "va_temperature"
+    VIDEO_REQUEST_REALTIME = "video_request_realtime" #jtmspro
     VOC_STATE = "voc_state"
     VOC_VALUE = "voc_value"
     VOICE_SWITCH = "voice_switch"
