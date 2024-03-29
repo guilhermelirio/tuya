@@ -145,6 +145,12 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             self._attr_fan_speed_list = enum_type.range
             self._attr_supported_features |= VacuumEntityFeature.FAN_SPEED
 
+        _LOGGER.debug(f"[Tuya] Status {self.device.status.get(DPCode.STATUS)}")
+        _LOGGER.debug(f"[Tuya] Robot State {self.device.status.get(DPCode.ROBOT_STATE)}")
+        _LOGGER.debug(f"[Tuya] Battery {self.device.status.get(DPCode.BATTERY)}")
+        _LOGGER.debug(f"[Tuya] Battery 2 {self.device.status.get(DPCode.ELECTRICITY_LEFT)}")
+        _LOGGER.debug(f"[Tuya] Battery % {self.device.status.get(DPCode.BATTERY_PERCENTAGE)}")
+
         # if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
         #     self._attr_supported_features |= VacuumEntityFeature.BATTERY
         #     self._attr_battery_level = int_type
@@ -152,8 +158,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     @property
     def battery_level(self) -> int | None:
         """Return Tuya device state."""
-        _LOGGER.debug(f"Battery Level {DPCode.BATTERY}")
-        return self.device.status.get(DPCode.BATTERY)
+        return self.device.status.get(DPCode.ELECTRICITY_LEFT)
     
     # @property
     # def battery_level(self) -> int | None:
@@ -171,7 +176,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         return self.device.status.get(DPCode.SUCTION)
     
     @property
-    def device_state_attributes(self):
+    def state_attributes(self):
         """Return the optional state attributes with device specific additions."""
         attr = {}
         if self.device.status.get(DPCode.MODE):
@@ -194,8 +199,6 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             return STATE_PAUSED
 
         status = self.device.status.get(DPCode.ROBOT_STATE)
-
-        _LOGGER.debug(f"Status {status}")
 
         if status == "standby":
             return STATE_IDLE
