@@ -145,12 +145,6 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             self._attr_fan_speed_list = enum_type.range
             self._attr_supported_features |= VacuumEntityFeature.FAN_SPEED
 
-        _LOGGER.debug(f"[Tuya] Status {self.device.status.get(DPCode.STATUS)}")
-        _LOGGER.debug(f"[Tuya] Robot State {self.device.status.get(DPCode.ROBOT_STATE)}")
-        _LOGGER.debug(f"[Tuya] Battery {self.device.status.get(DPCode.BATTERY)}")
-        _LOGGER.debug(f"[Tuya] Battery 2 {self.device.status.get(DPCode.ELECTRICITY_LEFT)}")
-        _LOGGER.debug(f"[Tuya] Battery % {self.device.status.get(DPCode.BATTERY_PERCENTAGE)}")
-
         # if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
         #     self._attr_supported_features |= VacuumEntityFeature.BATTERY
         #     self._attr_battery_level = int_type
@@ -158,7 +152,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     @property
     def battery_level(self) -> int | None:
         """Return Tuya device state."""
-        return self.device.status.get(DPCode.ELECTRICITY_LEFT)
+        return self.device.status.get(DPCode.BATTERY)
     
     # @property
     # def battery_level(self) -> int | None:
@@ -192,6 +186,14 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     @property
     def state(self):
         """Return Tuya device state."""
+
+        _LOGGER.debug(f"[Tuya] Status {self.device.status.get(DPCode.STATUS)}")
+        _LOGGER.debug(f"[Tuya] Robot State {self.device.status.get(DPCode.ROBOT_STATE)}")
+        _LOGGER.debug(f"[Tuya] Battery {self.device.status.get(DPCode.BATTERY)}")
+        _LOGGER.debug(f"[Tuya] Battery 2 {self.device.status.get(DPCode.ELECTRICITY_LEFT)}")
+        _LOGGER.debug(f"[Tuya] Battery % {self.device.status.get(DPCode.BATTERY_PERCENTAGE)}")
+        _LOGGER.debug(f"[Tuya] Status Geral % {self.device.status}")
+
         if (
             DPCode.PAUSE in self.device.status
             and self.device.status[DPCode.PAUSE]
