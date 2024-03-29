@@ -147,6 +147,7 @@ class DPCode(StrEnum):
     CHILD_LOCK = "child_lock"  # Child lock
     CISTERN = "cistern"
     CLEAN_AREA = "clean_area"
+    CLEAN_COUNT = "clean_count" # Vacuum Kabum Smart 900
     CLEAN_MODE = "clean_mode" # Vacuum Kabum Smart 900
     CLEAN_SWITCH = "clean_switch" # Vacuum Kabum Smart 900
     CLEAN_TIME = "clean_time"

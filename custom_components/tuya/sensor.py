@@ -1055,6 +1055,12 @@ SENSORS: dict[str, tuple[TuyaSensorEntityDescription, ...]] = {
             state_class=SensorStateClass.TOTAL_INCREASING,
         ),
         TuyaSensorEntityDescription(
+            key=DPCode.CLEAN_COUNT,
+            translation_key="total_cleaning_times",
+            icon="mdi:counter",
+            state_class=SensorStateClass.TOTAL_INCREASING,
+        ),
+        TuyaSensorEntityDescription(
             key=DPCode.DUSTER_CLOTH,
             translation_key="duster_cloth_life",
             icon="mdi:ticket-percent-outline",
