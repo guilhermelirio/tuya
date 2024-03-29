@@ -33,6 +33,7 @@ TUYA_STATUS_TO_HA = {
     "chargecompleted": STATE_DOCKED,
     "chargego": STATE_DOCKED,
     "charging": STATE_DOCKED,
+    "chargring": STATE_DOCKED,
     "cleaning": STATE_CLEANING,
     "curpointing": STATE_CLEANING,
     "docking": STATE_RETURNING,
@@ -178,7 +179,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         ):
             return STATE_PAUSED
 
-        status = self.device.status.get(DPCode.STATUS)
+        status = self.device.status.get(DPCode.ROBOT_STATE)
 
         _LOGGER.debug(f"Status {status}")
 
