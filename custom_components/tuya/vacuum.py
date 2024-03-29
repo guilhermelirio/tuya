@@ -1,5 +1,6 @@
 """Support for Tuya Vacuums."""
 from __future__ import annotations
+import logging
 
 from typing import Any
 
@@ -22,6 +23,8 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from . import HomeAssistantTuyaData
 from .base import EnumTypeData, IntegerTypeData, TuyaEntity
 from .const import DOMAIN, TUYA_DISCOVERY_NEW, DPCode, DPType
+
+_LOGGER = logging.getLogger(__name__)
 
 TUYA_MODE_RETURN_HOME = "chargego"
 TUYA_STATUS_TO_HA = {
@@ -141,13 +144,14 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             self._attr_fan_speed_list = enum_type.range
             self._attr_supported_features |= VacuumEntityFeature.FAN_SPEED
 
-        if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
-            self._attr_supported_features |= VacuumEntityFeature.BATTERY
-            self._attr_battery_level = int_type
+        # if int_type := self.find_dpcode(DPCode.BATTERY, dptype=DPType.INTEGER):
+        #     self._attr_supported_features |= VacuumEntityFeature.BATTERY
+        #     self._attr_battery_level = int_type
 
     @property
     def battery_level(self) -> int | None:
         """Return Tuya device state."""
+        _LOGGER.debug(f"Battery Level {DPCode.BATTERY}")
         return self.device.status.get(DPCode.BATTERY)
     
     # @property
@@ -175,6 +179,8 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
             return STATE_PAUSED
 
         status = self.device.status.get(DPCode.STATUS)
+
+        _LOGGER.debug(f"Status {status}")
 
         if status == "standby":
             return STATE_IDLE
