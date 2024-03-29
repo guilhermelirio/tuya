@@ -107,13 +107,12 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         super().__init__(device, device_manager)
 
         self._attr_fan_speed_list = []
-
+        
         self._attr_supported_features = (
             VacuumEntityFeature.SEND_COMMAND | 
             VacuumEntityFeature.STATE |
-            VacuumEntityFeature.BATTERY |
-            VacuumEntityFeature.FAN_SPEED |
-            VacuumEntityFeature.LOCATE
+            VacuumEntityFeature.STATUS |
+            VacuumEntityFeature.BATTERY
         )
         if self.find_dpcode(DPCode.PAUSE, prefer_function=True):
             self._attr_supported_features |= VacuumEntityFeature.PAUSE
@@ -149,28 +148,53 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     @property
     def battery_level(self) -> int | None:
         """Return Tuya device state."""
-        # if self._attr_battery_level is None or not (
-        #     status := self.device.status.get(DPCode.ELECTRICITY_LEFT)
-        # ):
-        #     return None
-        #return round(self._battery_level.scale_value(status))
         return self.device.status.get(DPCode.BATTERY)
+    # @property
+    # def battery_level(self) -> int | None:
+    #     """Return Tuya device state."""
+    #     # if self._attr_battery_level is None or not (
+    #     #     status := self.device.status.get(DPCode.ELECTRICITY_LEFT)
+    #     # ):
+    #     #     return None
+    #     #return round(self._battery_level.scale_value(status))
+    #     return self.device.status.get(DPCode.BATTERY)
 
     @property
     def fan_speed(self) -> str | None:
         """Return the fan speed of the vacuum cleaner."""
         return self.device.status.get(DPCode.SUCTION)
-
+    
     @property
-    def state(self) -> str | None:
-        """Return Tuya vacuum device state."""
-        # if self.device.status.get(DPCode.PAUSE) and not (
-        #     self.device.status.get(DPCode.STATUS)
-        # ):
-        #     return STATE_PAUSED
-        # if not (status := self.device.status.get(DPCode.STATUS)):
-        #     return None
-        return TUYA_STATUS_TO_HA.get(self._attr_state)
+    def state(self):
+        """Return Tuya device state."""
+        if (
+            DPCode.PAUSE in self.device.status
+            and self.device.status[DPCode.PAUSE]
+        ):
+            return STATE_PAUSED
+
+        status = self.device.status.get(DPCode.STATUS)
+
+        if status == "standby":
+            return STATE_IDLE
+        if status == "goto_charge" or status == "docking":
+            return STATE_RETURNING
+        if status == "charging" or status == "charge_done" or status == "chargecompleted":
+            return STATE_DOCKED
+        if status == "pause":
+            return STATE_PAUSED
+        return STATE_CLEANING
+
+    # @property
+    # def state(self) -> str | None:
+    #     """Return Tuya vacuum device state."""
+    #     # if self.device.status.get(DPCode.PAUSE) and not (
+    #     #     self.device.status.get(DPCode.STATUS)
+    #     # ):
+    #     #     return STATE_PAUSED
+    #     # if not (status := self.device.status.get(DPCode.STATUS)):
+    #     #     return None
+    #     return TUYA_STATUS_TO_HA.get(self._attr_state)
 
     def start(self, **kwargs: Any) -> None:
         """Start the device."""
