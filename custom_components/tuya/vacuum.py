@@ -171,6 +171,20 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
         return self.device.status.get(DPCode.SUCTION)
     
     @property
+    def device_state_attributes(self):
+        """Return the optional state attributes with device specific additions."""
+        attr = {}
+        if self.device.status.get(DPCode.MODE):
+          attr[DPCode.MODE] = self.device.status.get(DPCode.MODE)
+        if self.device.status.get(DPCode.ROBOT_STATE):
+          attr[DPCode.ROBOT_STATE] = self.device.status.get(DPCode.ROBOT_STATE)
+        if self.device.status.get(DPCode.CLEAN_AREA):
+          attr[DPCode.CLEAN_AREA] = self.device.status.get(DPCode.CLEAN_AREA)
+        if self.device.status.get(DPCode.CLEAN_TIME):
+          attr[DPCode.CLEAN_TIME] = self.device.status.get(DPCode.CLEAN_TIME)
+        return attr
+    
+    @property
     def state(self):
         """Return Tuya device state."""
         if (
