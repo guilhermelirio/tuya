@@ -178,24 +178,13 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
 
         if status == "standby":
             return STATE_IDLE
-        if status == "goto_charge" or status == "docking":
+        if status == "goto_charge" or status == "docking" or status == "tocharge":
             return STATE_RETURNING
-        if status == "charging" or status == "charge_done" or status == "chargecompleted":
+        if status == "charging" or status == "charge_done" or status == "chargecompleted" or status == "fullcharge":
             return STATE_DOCKED
         if status == "pause":
             return STATE_PAUSED
         return STATE_CLEANING
-
-    # @property
-    # def state(self) -> str | None:
-    #     """Return Tuya vacuum device state."""
-    #     # if self.device.status.get(DPCode.PAUSE) and not (
-    #     #     self.device.status.get(DPCode.STATUS)
-    #     # ):
-    #     #     return STATE_PAUSED
-    #     # if not (status := self.device.status.get(DPCode.STATUS)):
-    #     #     return None
-    #     return TUYA_STATUS_TO_HA.get(self._attr_state)
 
     def start(self, **kwargs: Any) -> None:
         """Start the device."""
