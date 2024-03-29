@@ -77,6 +77,8 @@ BATTERY_SENSORS: tuple[TuyaSensorEntityDescription, ...] = (
     ),
     TuyaSensorEntityDescription(
         key=DPCode.RESIDUAL_ELECTRICITY,
+        icon="mdi:battery",
+        native_unit_of_measurement=PERCENTAGE,
         device_class=SensorDeviceClass.BATTERY,
         entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
@@ -85,6 +87,7 @@ BATTERY_SENSORS: tuple[TuyaSensorEntityDescription, ...] = (
     TuyaSensorEntityDescription(
         key=DPCode.BATTERY,
         icon="mdi:battery",
+        native_unit_of_measurement=PERCENTAGE,
         device_class=SensorDeviceClass.BATTERY,
         entity_category=EntityCategory.DIAGNOSTIC,
         state_class=SensorStateClass.MEASUREMENT,
@@ -1075,7 +1078,15 @@ SENSORS: dict[str, tuple[TuyaSensorEntityDescription, ...]] = {
             icon="mdi:ticket-percent-outline",
             state_class=SensorStateClass.MEASUREMENT,
         ),
-        *BATTERY_SENSORS,
+        TuyaSensorEntityDescription(
+            key=DPCode.BATTERY,
+            icon="mdi:battery",
+            native_unit_of_measurement=PERCENTAGE,
+            device_class=SensorDeviceClass.BATTERY,
+            entity_category=EntityCategory.DIAGNOSTIC,
+            state_class=SensorStateClass.MEASUREMENT,
+            translation_key="battery",
+        ),
     ),
     # Curtain
     # https://developer.tuya.com/en/docs/iot/s?id=K9gf48qy7wkre

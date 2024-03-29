@@ -149,6 +149,7 @@ class TuyaVacuumEntity(TuyaEntity, StateVacuumEntity):
     def battery_level(self) -> int | None:
         """Return Tuya device state."""
         return self.device.status.get(DPCode.BATTERY)
+    
     # @property
     # def battery_level(self) -> int | None:
     #     """Return Tuya device state."""
